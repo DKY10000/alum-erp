@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Api(value = "/UserController", description = "App版本", tags = "UserController")
+@Api(value = "/UserController", description = "用户信息", tags = "UserController")
 @RestController
 @RequestMapping(value = "/User")
 public class UserController {
@@ -39,14 +39,13 @@ public class UserController {
             pageNo = pageNo == null ? 0 : pageNo;
             pageSize = pageSize == null ? 10 : pageSize;
             PageHelper.startPage(pageNo, pageSize, true);
-            List<User> userList = new ArrayList<>();
-            User results = new User();
-            userList.add(results);
-            if (results == null) {
-                return new AjaxResult().error("没有找到相关客户资料数据");
+
+            List<User> results = userAction.getByQueryModel();
+            if (results.size() == 0) {
+                return new AjaxResult().error("没有找到相关用户");
             }
             PageHelper.clearPage();
-            return new AjaxResult().success(new PageInfo(userList));
+            return new AjaxResult().success(new PageInfo<>(results));
         } catch (Exception e) {
             return new AjaxResult().error(ConstantCode.ERROR_CODE, BeanUtils.getErrorInfoFromException(e), "获取数据时发生异常.");
         }

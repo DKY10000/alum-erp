@@ -1,5 +1,9 @@
 package com.dky.eureka.service;
 
-public interface IUserService {
+import com.dky.eureka.domain.user.entity.User;
 
+import java.util.List;
+
+public interface IUserService {
+    List<User> selectByQueryModel();
 }

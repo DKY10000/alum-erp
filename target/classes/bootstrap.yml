@@ -1,0 +1,35 @@
+##############################################################################
+############################# 发布时修改这部分参数即可 ############################
+
+#EUREKA_HOST: localhost
+#EUREKA_PORT: 8498
+#
+#CONFIG_PROFILE: dev
+#CONFIG_LABEL: erp_dev
+
+##############################################################################
+
+spring:
+  application:
+    name: zlcloud-crm-service
+  cloud:
+#    inetutils:
+#      ignored-interfaces:
+#        - docker0
+#        - veth.*
+    config:
+      profile: ${CONFIG_PROFILE}
+      label: ${CONFIG_LABEL}
+#      fail-fast: true                   # 无法从配置服务器获取配置，不采取默认端口启动，直接失败启动
+      discovery:
+        enabled: true
+        service-id: zlcloud-config-server
+
+eureka:
+  client:
+   serviceUrl:
+    defaultZone: http://zl:zl214365@${EUREKA_HOST}:${EUREKA_PORT}/eureka/
+  instance:
+    prefer-ip-address: true            # 将自身的IP地址注册到Eureka Server上，否则注册所在操作系统的hostname到Eureka Server
+    metadata-map:
+      cluster: zlcloud

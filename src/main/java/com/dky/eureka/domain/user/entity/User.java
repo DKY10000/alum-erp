@@ -1,7 +1,18 @@
 package com.dky.eureka.domain.user.entity;
 
+import io.swagger.annotations.ApiModel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ApiModel(value = "User")
 @Table(name = "sys_user")
 public class User {
     @Id
