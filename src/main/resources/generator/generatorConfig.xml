@@ -4,16 +4,22 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-    <properties resource="generator/config.properties"/>
+    <properties resource="generator/config.properties"/><!--数据库配置-->
 
     <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
         <property name="beginningDelimiter" value="`"/>
         <property name="endingDelimiter" value="`"/>
+        <!--驼峰字段-->
+        <property name="useActualColumnNames" value="true"/>
+        <!--<property name="mapUnderscoreToCamelCase" value="true" />-->
 
         <plugin type="${mapper.plugin}">
             <property name="mappers" value="${mapper.Mapper}"/>
         </plugin>
 
+        <!-- 必须要有的，使用这个配置链接数据库
+           @TODO:是否可以扩展
+        -->
         <jdbcConnection driverClass="${jdbc.driverClass}"
                         connectionURL="${jdbc.url}"
                         userId="${jdbc.user}"
