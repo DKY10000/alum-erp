@@ -45,7 +45,7 @@ public class UserController {
                 return new AjaxResult().error("没有找到相关用户");
             }
             PageHelper.clearPage();
-            return new AjaxResult().success(new PageInfo<>(results));
+            return new AjaxResult().success(new PageInfo(results));
         } catch (Exception e) {
             return new AjaxResult().error(ConstantCode.ERROR_CODE, BeanUtils.getErrorInfoFromException(e), "获取数据时发生异常.");
         }
